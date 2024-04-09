@@ -1,0 +1,59 @@
+﻿<UserControl x:Class="WorldApp.WPF.Views.AddCountryView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:WorldApp.WPF" 
+             xmlns:validation="clr-namespace:WorldApp.WPF.Validations"
+             xmlns:res="clr-namespace:WorldApp.WPF.Resources"
+             mc:Ignorable="d"
+             Background="White">
+    <Grid Margin="20">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.7*" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Label Content="{x:Static res:Resources.CONTINENT_NAME}" Style="{StaticResource lblRightAlignStyle}" />
+        <ComboBox Grid.Column="1"  Style="{StaticResource cmbBoxStyle}" 
+                  ItemsSource="{Binding Continents}" DisplayMemberPath="ContinentName" SelectedValue="{Binding SelectedContinent, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+        <Label Grid.Row="1" Content="{x:Static res:Resources.COUNTRY_NAME}" Style="{StaticResource lblRightAlignStyle}" />
+        <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource TxtBoxStyle}" 
+                 Validation.ErrorTemplate="{StaticResource validationTemplate}">
+            <TextBox.Text>
+                <Binding Path="CountryName" Mode="TwoWay" ValidatesOnExceptions="True"  UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <validation:RequireFeildValidator  ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <Label Grid.Row="2" Content="{x:Static res:Resources.MOST_SPOKEN_LANGUAGE}" Style="{StaticResource lblRightAlignStyle}" />
+        <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource TxtBoxStyle}" 
+                 Validation.ErrorTemplate="{StaticResource validationTemplate}">
+            <TextBox.Text>
+                <Binding Path="Language" Mode="TwoWay" ValidatesOnExceptions="True"  UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <validation:RequireFeildValidator  ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <Label Grid.Row="3" Content="{x:Static res:Resources.CURRENCY}" Style="{StaticResource lblRightAlignStyle}" />
+        <TextBox Grid.Row="3" Grid.Column="1" Style="{StaticResource TxtBoxStyle}" 
+                 Validation.ErrorTemplate="{StaticResource validationTemplate}">
+            <TextBox.Text>
+                <Binding Path="Currency" Mode="TwoWay" ValidatesOnExceptions="True"  UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <validation:RequireFeildValidator  ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+    </Grid>
+</UserControl>
